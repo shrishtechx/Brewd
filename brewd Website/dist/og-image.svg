@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3A2317" />
+      <stop offset="100%" stop-color="#2A160D" />
+    </linearGradient>
+    <linearGradient id="brass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E7C879" />
+      <stop offset="100%" stop-color="#7A5C24" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)" />
+  <text x="90" y="300" font-family="Georgia, serif" font-size="120" font-weight="800" fill="#F7F1E6">Brewd<tspan font-family="sans-serif" font-size="48" fill="#D4AF5A">.US</tspan></text>
+  <text x="92" y="370" font-family="sans-serif" font-size="34" fill="#D9C7A6">South Indian filter coffee, made for America</text>
+  <text x="92" y="430" font-family="sans-serif" font-size="26" fill="#B08A3E">Arabica · Robusta · Chicory · Ships across the US</text>
+  <g transform="translate(950 180)">
+    <rect x="40" y="0" width="40" height="20" rx="8" fill="url(#brass)" />
+    <path d="M0 30 h120 a10 10 0 0 1 10 10 v60 h-140 v-60 a10 10 0 0 1 10 -10 z" fill="url(#brass)" />
+    <rect x="-6" y="100" width="132" height="12" rx="6" fill="#7A5C24" />
+    <path d="M6 112 h108 l-14 100 a12 12 0 0 1 -12 9 h-44 a12 12 0 0 1 -12 -9 z" fill="url(#brass)" />
+  </g>
+</svg>

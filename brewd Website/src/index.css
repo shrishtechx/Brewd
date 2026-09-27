@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: "Poppins", system-ui, sans-serif;
+  background-color: #f7f1e6;
+  color: #3a2317;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+/* Visible focus states for keyboard users */
+:focus-visible {
+  outline: 3px solid #b5552f;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-7xl px-6 sm:px-8 lg:px-12;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-medium tracking-wide transition-all duration-300;
+  }
+
+  .btn-primary {
+    @apply btn bg-coffee-brown text-cream hover:bg-roasted hover:shadow-lg hover:shadow-coffee-brown/30;
+  }
+
+  .btn-ghost {
+    @apply btn border border-coffee-brown/40 bg-transparent text-coffee-brown hover:border-coffee-brown hover:bg-coffee-brown/5;
+  }
+
+  .btn-brass {
+    @apply btn bg-gradient-to-br from-brass-light to-brass text-roasted hover:shadow-lg hover:shadow-brass/40;
+  }
+
+  .kicker {
+    @apply text-xs font-semibold uppercase tracking-[0.25em] text-terracotta;
+  }
+
+  .heading-serif {
+    @apply font-serif font-bold leading-[1.05] tracking-tight;
+  }
+}
+
+/* Steam helper for SVG */
+.steam-puff {
+  transform-origin: center bottom;
+}
+
+/* Reduced motion: stop decorative animations */
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-steam,
+  .animate-spin-slow {
+    animation: none !important;
+  }
+}
