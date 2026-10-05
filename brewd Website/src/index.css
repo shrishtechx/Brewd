@@ -71,8 +71,64 @@ body {
 /* Reduced motion: stop decorative animations */
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee,
+  .animate-marquee-slow,
   .animate-steam,
   .animate-spin-slow {
     animation: none !important;
   }
 }
+
+/* ---------------------------------------------------------------------------
+   Accessibility widget: visual effects driven by data-attributes on <html>.
+   See src/components/AccessibilityWidget.tsx.
+--------------------------------------------------------------------------- */
+
+/* Line height levels */
+html[data-a11y-line-height="1"] body { line-height: 1.7; }
+html[data-a11y-line-height="2"] body { line-height: 2; }
+html[data-a11y-line-height="3"] body { line-height: 2.4; }
+
+/* Hide images and background imagery for a text-only reading experience */
+html[data-a11y-hide-images] img,
+html[data-a11y-hide-images] video,
+html[data-a11y-hide-images] svg {
+  visibility: hidden !important;
+}
+
+/* Readable fonts: force a simple, high-legibility system sans everywhere */
+html[data-a11y-readable-font] body,
+html[data-a11y-readable-font] body * {
+  font-family: Arial, Helvetica, system-ui, sans-serif !important;
+  letter-spacing: 0.01em;
+}
+
+/* Dyslexia-friendly: wider spacing + heavier weight to aid tracking.
+   (If a dedicated OpenDyslexic font is added to /public later, swap it in
+   via @font-face and reference it here.) */
+html[data-a11y-dyslexic-font] body,
+html[data-a11y-dyslexic-font] body * {
+  font-family: "Comic Sans MS", "Segoe UI", Verdana, sans-serif !important;
+  letter-spacing: 0.06em;
+  word-spacing: 0.14em;
+}
+
+/* Stop animations everywhere */
+html[data-a11y-stop-animations] *,
+html[data-a11y-stop-animations] *::before,
+html[data-a11y-stop-animations] *::after {
+  animation-duration: 0s !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0s !important;
+  scroll-behavior: auto !important;
+}
+
+/* Color filters applied to the whole page.
+   The widget launcher is excluded so it stays usable while filters are on. */
+html[data-a11y-invert] body { filter: invert(1) hue-rotate(180deg); }
+html[data-a11y-contrast] body { filter: contrast(1.4); }
+html[data-a11y-invert][data-a11y-contrast] body {
+  filter: invert(1) hue-rotate(180deg) contrast(1.4);
+}
+html[data-a11y-saturation="low"] body { filter: saturate(0.5); }
+html[data-a11y-saturation="high"] body { filter: saturate(1.8); }
+html[data-a11y-saturation="grayscale"] body { filter: grayscale(1); }

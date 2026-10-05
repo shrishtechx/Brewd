@@ -39,6 +39,10 @@ export default {
           "0%": { transform: "translateX(0)" },
           "100%": { transform: "translateX(-25%)" },
         },
+        "marquee-slow": {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
         "spin-slow": {
           "0%": { transform: "rotate(0deg)" },
           "100%": { transform: "rotate(360deg)" },
@@ -47,6 +51,7 @@ export default {
       animation: {
         steam: "steam 3s ease-out infinite",
         marquee: "marquee 30s linear infinite",
+        "marquee-slow": "marquee-slow 45s linear infinite",
         "spin-slow": "spin-slow 24s linear infinite",
       },
     },

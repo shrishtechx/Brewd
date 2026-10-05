@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 const links = [
-  { label: "Story", href: "#founder" },
-  { label: "Products", href: "#products" },
-  { label: "Brew", href: "#brew" },
+  { label: "Our Story", href: "#/our-story" },
+  { label: "Products", href: "#/products" },
+  { label: "How To Brew", href: "#/how-to-brew" },
   { label: "Blend", href: "#blend" },
   { label: "Ask Janani", href: "#ask" },
 ];
@@ -40,7 +40,7 @@ export default function Navbar() {
       }`}
     >
       <div className="container-x flex items-center justify-between py-3">
-        <a href="#hero" aria-label="Brew'd home" onClick={() => setOpen(false)}>
+        <a href="#/" aria-label="Brew'd home" onClick={() => setOpen(false)}>
           <img src="/brewd-logo.png" alt="Brew'd" className="h-9 w-auto sm:h-12" />
         </a>
 
@@ -50,7 +50,9 @@ export default function Navbar() {
             <a
               key={l.href}
               href={l.href}
-              className="font-body text-sm font-medium text-coffee-brown transition-colors hover:text-terracotta"
+              className={`font-body text-sm font-medium transition-colors hover:text-terracotta ${
+                solid ? "text-coffee-brown" : "text-cream"
+              }`}
             >
               {l.label}
             </a>
@@ -58,14 +60,6 @@ export default function Navbar() {
         </div>
 
         <div className="flex items-center gap-2">
-          <a
-            href="#preorder"
-            className="btn-primary px-4 py-2.5 text-xs sm:px-5 sm:text-sm"
-            onClick={() => setOpen(false)}
-          >
-            Pre-order
-          </a>
-
           {/* Hamburger (mobile / tablet only) */}
           <button
             type="button"
@@ -73,7 +67,9 @@ export default function Navbar() {
             aria-expanded={open}
             aria-controls="mobile-menu"
             onClick={() => setOpen((v) => !v)}
-            className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-full text-coffee-brown lg:hidden"
+            className={`flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-full lg:hidden ${
+              solid ? "text-coffee-brown" : "text-cream"
+            }`}
           >
             <span
               className={`block h-0.5 w-6 bg-current transition-transform duration-300 ${

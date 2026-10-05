@@ -1,13 +1,13 @@
 import { motion } from "framer-motion";
 import Section from "./Section";
+import { sourcingCopy } from "../content/site";
 
-// Points on the bean, labeled by ingredient. We avoid naming specific estates
-// or suppliers here, keeping the sourcing detail minimal.
+// Points on the bean, labeled by ingredient. Chicory is intentionally not
+// shown here — this section is about the sourced beans (Arabica + Robusta).
 // `anchor` controls which side the label sits so it never runs off the bean.
 const points = [
-  { name: "Arabica", x: 150, y: 140, anchor: "end" as const },
-  { name: "Robusta", x: 175, y: 235, anchor: "start" as const },
-  { name: "Chicory", x: 150, y: 320, anchor: "end" as const },
+  { name: "Arabica", x: 150, y: 170, anchor: "end" as const },
+  { name: "Robusta", x: 175, y: 265, anchor: "start" as const },
 ];
 
 export default function SourcingStory() {
@@ -22,10 +22,7 @@ export default function SourcingStory() {
             Grown in South India, where this cup has always belonged.
           </h2>
           <p className="mt-6 max-w-xl font-body text-lg leading-relaxed text-cream/80">
-            Our Arabica, Robusta, and Chicory come from the coffee-growing
-            regions of Coorg, Karnataka (South India), where filter coffee has
-            been a way of life for generations. That heritage is part of what
-            makes this cup taste like nothing else.
+            {sourcingCopy}
           </p>
         </div>
 

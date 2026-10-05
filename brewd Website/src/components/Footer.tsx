@@ -37,7 +37,8 @@ export default function Footer() {
               Stay in the loop
             </p>
             <p className="mt-2 max-w-xl font-serif text-xl text-cream sm:text-2xl">
-              Be the first to know when the next batch of Brew'd is ready.
+              Be the first to hear about fresh batches, new arrivals and
+              exclusive offers at Brew'd.
             </p>
           </div>
 
@@ -90,16 +91,22 @@ export default function Footer() {
                 Follow
               </span>
               <div className="flex gap-3">
-                {socialLinks.map((s) => (
-                  <a
-                    key={s.label}
-                    href={s.href}
-                    aria-label={s.label}
-                    className="flex h-10 w-10 items-center justify-center rounded-full border border-cream/25 text-cream/85 transition-colors hover:border-brass-light hover:bg-brass-light hover:text-roasted"
-                  >
-                    <SocialIcon name={s.name} />
-                  </a>
-                ))}
+                {socialLinks.map((s) => {
+                  const external = s.href.startsWith("http");
+                  return (
+                    <a
+                      key={s.label}
+                      href={s.href}
+                      aria-label={s.label}
+                      {...(external
+                        ? { target: "_blank", rel: "noopener noreferrer" }
+                        : {})}
+                      className="flex h-10 w-10 items-center justify-center rounded-full border border-cream/25 text-cream/85 transition-colors hover:border-brass-light hover:bg-brass-light hover:text-roasted"
+                    >
+                      <SocialIcon name={s.name} />
+                    </a>
+                  );
+                })}
               </div>
             </div>
             <div className="flex flex-col gap-3">

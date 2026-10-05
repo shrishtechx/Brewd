@@ -20,24 +20,41 @@ function BrassDefs({ id }: { id: string }) {
 function StepArt({ n }: { n: number }) {
   const common = "h-40 w-40 sm:h-56 sm:w-56";
   if (n === 1) {
+    // A clearer brass filter: the two stacked chambers with a plunger pressing
+    // the grounds and a spoon adding coffee from above.
     return (
       <svg viewBox="0 0 120 120" className={common} aria-hidden="true">
         <BrassDefs id="bg1" />
-        <rect x="50" y="14" width="20" height="9" rx="4" fill="url(#bg1)" />
-        <path d="M34 26 h52 a6 6 0 0 1 6 6 v26 h-64 v-26 a6 6 0 0 1 6 -6 z" fill="url(#bg1)" />
-        <ellipse cx="60" cy="26" rx="26" ry="5" fill="#E7C879" />
+
+        {/* Spoon tipping grounds in from the top-left */}
+        <g transform="rotate(-24 26 20)">
+          <ellipse cx="24" cy="20" rx="10" ry="5" fill="url(#bg1)" />
+          <rect x="32" y="18" width="20" height="3" rx="1.5" fill="#7A5C24" />
+        </g>
+        {/* Falling grounds */}
         {[0, 1, 2].map((i) => (
           <motion.circle
             key={i}
-            cx={52 + i * 8}
-            r="2.5"
+            cx={44 + i * 6}
+            r="2.2"
             fill="#3A2317"
-            initial={{ cy: 4, opacity: 0 }}
-            animate={{ cy: 30, opacity: [0, 1, 0] }}
-            transition={{ duration: 1, delay: i * 0.2, repeat: Infinity, repeatDelay: 0.6 }}
+            initial={{ cy: 24, opacity: 0 }}
+            animate={{ cy: 44, opacity: [0, 1, 0] }}
+            transition={{ duration: 1, delay: i * 0.25, repeat: Infinity, repeatDelay: 0.6 }}
           />
         ))}
-        <rect x="30" y="58" width="60" height="6" rx="3" fill="#7A5C24" />
+
+        {/* Upper chamber (holds grounds) */}
+        <path d="M36 40 h48 a5 5 0 0 1 5 5 v18 h-58 v-18 a5 5 0 0 1 5 -5 z" fill="url(#bg1)" />
+        <ellipse cx="60" cy="40" rx="24" ry="5" fill="#E7C879" />
+        {/* Coffee bed line + plunger pressing it */}
+        <rect x="40" y="50" width="40" height="7" rx="2" fill="#3A2317" />
+        <rect x="56" y="30" width="8" height="22" rx="2" fill="#7A5C24" />
+        <rect x="50" y="28" width="20" height="5" rx="2.5" fill="url(#bg1)" />
+
+        {/* Lower chamber (collects decoction) */}
+        <path d="M40 70 h40 l-4 26 a6 6 0 0 1 -6 5 h-20 a6 6 0 0 1 -6 -5 z" fill="url(#bg1)" />
+        <ellipse cx="60" cy="70" rx="20" ry="4.5" fill="#2A160D" />
       </svg>
     );
   }
@@ -106,7 +123,13 @@ function StepArt({ n }: { n: number }) {
 
 const AUTO_MS = 4500;
 
-export default function BrewGuide() {
+type BrewGuideProps = {
+  /** When true, render just the carousel (no Section wrapper / heading),
+   *  for use inside the standalone How To Brew page. */
+  standalone?: boolean;
+};
+
+export default function BrewGuide({ standalone = false }: BrewGuideProps) {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const reduced = usePrefersReducedMotion();
@@ -124,15 +147,16 @@ export default function BrewGuide() {
 
   const step = brewSteps[index];
 
-  return (
-    <Section id="brew" ariaLabel="How to brew">
-      <div className="container-x">
-        <div className="mx-auto max-w-2xl text-center">
-          <p className="kicker mb-4">How to brew</p>
-          <h2 className="heading-serif text-3xl text-coffee-brown sm:text-4xl lg:text-5xl">
-            The traditional way, step by step.
-          </h2>
-        </div>
+  const body = (
+    <>
+        {!standalone && (
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="kicker mb-4">How to brew</p>
+            <h2 className="heading-serif text-3xl text-coffee-brown sm:text-4xl lg:text-5xl">
+              The traditional way, step by step.
+            </h2>
+          </div>
+        )}
 
         {/* Carousel */}
         <div
@@ -220,9 +244,20 @@ export default function BrewGuide() {
         <p className="mx-auto mt-10 max-w-2xl rounded-2xl border border-terracotta/30 bg-terracotta/5 px-6 py-5 text-center font-body text-coffee-brown">
           <span className="font-semibold">The ratio that works best:</span> 1
           part decoction to 2 parts hot milk of your choice, preferably whole
-          fat milk. Adjust to how strong or mild your cup should be.
+          fat milk. Adjust to how strong or mild your cup should be. It's
+          advised to not microwave your coffee, just adding hot milk to your
+          decoction might be good enough {"\u263A"}
         </p>
-      </div>
+    </>
+  );
+
+  if (standalone) {
+    return <div className="pb-4">{body}</div>;
+  }
+
+  return (
+    <Section id="brew" ariaLabel="How to brew">
+      <div className="container-x">{body}</div>
     </Section>
   );
 }

@@ -2,54 +2,65 @@ import { motion } from "framer-motion";
 import WordCycler from "./WordCycler";
 import HeroVideo from "./HeroVideo";
 
+/**
+ * Hero: the brand video now fills the first screen as a full-bleed background
+ * (coffee "throughout the first part of the page"), with the Brew'd headline
+ * and CTAs layered on top. The old Arabica/Robusta/chicory paragraph has been
+ * removed per the corrections.
+ */
 export default function Hero() {
   return (
     <header
       id="hero"
-      className="relative min-h-screen overflow-hidden pt-20 sm:pt-24"
+      className="relative flex min-h-screen items-center overflow-hidden"
       aria-label="Brew'd hero"
     >
-      <div className="container-x grid h-full min-h-[calc(100vh-5rem)] items-center gap-8 pb-12 sm:gap-12 lg:grid-cols-2">
-        {/* Copy */}
+      {/* Full-bleed background video */}
+      <div className="absolute inset-0 -z-0">
+        <HeroVideo />
+        {/* Readability overlay so the copy stays legible over the footage */}
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-coffee-brown/80 via-coffee-brown/55 to-coffee-brown/20" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-coffee-brown/70 via-transparent to-coffee-brown/40" />
+      </div>
+
+      {/* Copy layered over the video */}
+      <div className="container-x relative z-10 pt-24 pb-16 sm:pt-28">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-          className="order-2 lg:order-1"
+          className="max-w-2xl"
         >
-          <p className="kicker mb-5">Real Kaapi · Now in the US</p>
-          <h1 className="heading-serif text-3xl text-coffee-brown sm:text-4xl lg:text-5xl">
+          <p className="kicker mb-5 text-brass-light">Real Kaapi · Now in the US</p>
+          <h1 className="heading-serif text-4xl text-cream drop-shadow-sm sm:text-5xl lg:text-6xl">
             South India has been{" "}
             <WordCycler
               words={["perfecting", "brewing", "refining"]}
-              className="text-terracotta"
+              className="text-brass-light"
             />{" "}
             this cup for over a century. Your morning is about to find out why.
           </h1>
-          <p className="mt-6 max-w-xl font-body text-lg leading-relaxed text-coffee-mid">
-            Bold, aromatic filter coffee brewed with the unique combination of
-            Arabica, Robusta, and chicory, tailored to hit the right spot,
-            always. A combination no other coffee tradition on earth has ever
-            thought to replicate.
-          </p>
+
           <div className="mt-9 flex flex-wrap gap-4">
-            <a href="#preorder" className="btn-primary">
+            <a href="#/order" className="btn-brass">
               Shop Now
             </a>
-            <a href="#blend" className="btn-ghost">
+            <a href="#blend" className="btn-ghost border-cream/50 text-cream hover:border-cream hover:bg-cream/10">
               What goes into it
             </a>
           </div>
         </motion.div>
+      </div>
 
-        {/* Video */}
+      {/* Scroll cue */}
+      <div className="pointer-events-none absolute bottom-6 left-1/2 z-10 -translate-x-1/2">
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-          className="order-1 h-[48vh] min-h-[320px] w-full sm:h-[58vh] lg:order-2 lg:h-[72vh]"
+          aria-hidden="true"
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+          className="flex h-10 w-6 items-start justify-center rounded-full border-2 border-cream/50 p-1.5"
         >
-          <HeroVideo />
+          <span className="h-2 w-1 rounded-full bg-cream/70" />
         </motion.div>
       </div>
     </header>

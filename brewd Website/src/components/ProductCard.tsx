@@ -104,7 +104,7 @@ export default function ProductCard({ product, index }: ProductCardProps) {
         </p>
 
         <div
-          className={`mt-7 flex items-end justify-between border-t pt-5 ${
+          className={`mt-7 flex flex-col items-center gap-4 border-t pt-5 text-center ${
             highlighted ? "border-brass-light/30" : "border-brass/20"
           }`}
         >
@@ -124,11 +124,13 @@ export default function ProductCard({ product, index }: ProductCardProps) {
               {product.price}
             </p>
           </div>
+          {/* Order Now takes the customer to the order page where sizes and
+              prices will be listed once finalised. */}
           <a
-            href="#preorder"
+            href="#/order"
             className={highlighted ? "btn-brass" : "btn-ghost"}
           >
-            Pre-order
+            Order Now
           </a>
         </div>
       </motion.div>

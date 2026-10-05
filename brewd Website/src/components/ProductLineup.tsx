@@ -6,9 +6,10 @@ export default function ProductLineup() {
   return (
     <Section id="products" ariaLabel="Product lineup" reveal={false}>
       <div className="container-x">
-        <div className="mx-auto max-w-2xl text-center">
+        <div className="mx-auto max-w-3xl text-center">
           <h2 className="heading-serif text-3xl text-coffee-brown sm:text-4xl lg:text-5xl">
-            Three ways into the same hundred-year-old cup.
+            Tradition just rang your doorbell. Welcome to your new-old coffee
+            experience.
           </h2>
           <p className="mt-5 font-body text-lg text-coffee-mid">
             Pick the one that fits your morning. They all end the same way, with
@@ -16,7 +17,7 @@ export default function ProductLineup() {
           </p>
         </div>
 
-        <div className="mt-14 grid gap-7 md:grid-cols-3 md:items-stretch">
+        <div className="mt-14 grid gap-7 sm:grid-cols-2 md:items-stretch lg:grid-cols-4">
           {products.map((product, i) => (
             <ProductCard key={product.id} product={product} index={i} />
           ))}
